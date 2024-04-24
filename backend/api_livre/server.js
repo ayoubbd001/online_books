@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import connectToDatabase from "./db/dbConnect.js";
 
 dotenv.config();
 
@@ -13,8 +14,10 @@ app.use(express.json());
 const port = process.env.port || 3001;
 
 app.get("/", (req, res) => {
-  console.log("hello");
+  res.send("hello");
 });
+
+connectToDatabase();
 
 app.listen(port, (err) => {
   if (err) {

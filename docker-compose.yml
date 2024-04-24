@@ -1,0 +1,34 @@
+version: "3.8"
+services:
+  api_livre:
+    build: ./backend/api_livre
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mongodb
+
+  api_client:
+    build: ./backend/api_client
+    ports:
+      - "3002:3002"
+    depends_on:
+      - mongodb
+
+  api_notification:
+    build: ./backend/api_notification
+    ports:
+      - "3003:3003"
+    depends_on:
+      - mongodb
+
+  api_emprunt:
+    build: ./backend/api_emprunt
+    ports:
+      - "3004:3004"
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
