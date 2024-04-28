@@ -1,0 +1,138 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#root,
+.app_box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+.main {
+  position: relative;
+  width: 84%;
+  height: 100%;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-top: 2px solid #ddd;
+  width: 100%;
+  z-index: 4 !important;
+  background-color: #fff;
+}
+
+.side {
+  width: 16%;
+  height: 100%;
+  border-right: 2px solid #ddd;
+}
+
+/* NAV */
+
+.logo {
+  border-bottom: 1px solid #ddd;
+}
+
+.box_nav {
+  width: 100% !important;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: inherit !important;
+  text-align: center;
+  display: inline-flex !important;
+  gap: 5px;
+  transition: all 600ms;
+  width: 100%;
+  letter-spacing: 1px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  flex-wrap: nowrap !important;
+  padding: 6px 20px !important;
+}
+.nav-link > span {
+  display: flex;
+  align-items: center;
+}
+
+.nav {
+  margin-bottom: 3rem;
+}
+
+.nav-link.active {
+  border-left: 5px solid #274977;
+  border-right: 5px solid #274977;
+  color: #1a101b !important;
+  border-radius: 10px;
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.04), 0 1px 6px rgba(0, 0, 0, 0.04);
+}
+
+.nav-bar {
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.nav-link span + span {
+  font-size: 12px !important;
+}
+
+.nav-link > span > svg {
+  width: 12px !important;
+  height: 12px !important;
+}
+@media screen and (width <= 500px) {
+  .nav-link > span > svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+  .nav-link span + span {
+    display: none !important;
+  }
+}
+
+/* MAIN */
+
+.app-content {
+  background-color: #f6f6f6f2 !important;
+  height: 100vh !important;
+  overflow-y: scroll !important;
+}
+
+.main-body {
+  margin-bottom: 80px;
+}
+
+#dropdown-item-button {
+  border-radius: 20%;
+  background-color: #274977;
+  border: none !important;
+}
+
+.dropdown-toggle::after {
+  display: none !important;
+}
+
+/* CARD */
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: initial;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
