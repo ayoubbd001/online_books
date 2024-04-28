@@ -1,0 +1,46 @@
+version: "3.8"
+services:
+  api_livre:
+    build: ./api_livre
+    ports:
+      - "3001:3000"
+    depends_on:
+      - mongodb
+
+  api_client:
+    build: ./api_client
+    ports:
+      - "3005:3000"
+    depends_on:
+      - mongodb
+
+  api_notification:
+    build: ./api_notification
+    ports:
+      - "3006:3000"
+    depends_on:
+      - mongodb
+
+  api_emprunt:
+    build: ./api_emprunt
+    ports:
+      - "3007:3000"
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+
+  gateway:
+    image: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./gateway/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - api_livre
+      - api_client
+      - api_notification
+      - api_emprunt
