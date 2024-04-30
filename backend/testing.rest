@@ -1,0 +1,15 @@
+
+POST http://localhost:3005/clients/create
+
+Content-Type: application/json
+
+{
+    "firstname" :"mas",
+    "lastname" :"yost",
+    "email":"melo@gmail.com",
+    "phone" :"0672572791"
+}
+
+
+
+

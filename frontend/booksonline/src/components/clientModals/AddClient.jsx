@@ -6,17 +6,15 @@ import Row from "react-bootstrap/Row";
 
 export default function AddClient({ isShow, setIsShow }) {
   const handleClose = () => setIsShow(false);
-  const myForm = useRef(null);
   const handleSub = (e) => {
     e.preventDefault();
     console.log("Form submitted");
   };
 
-  const handleSubmitButtonClick = () => {
-    if (myForm.current) {
-      myForm.current.dispatchEvent(new Event("submit", { cancelable: true }));
-    }
-  };
+  // const handleSubmitButtonClick = () => {
+  //   if (myForm.current) {
+  //     myForm.current.submit();
+  //   }
 
   return (
     <>
@@ -25,7 +23,7 @@ export default function AddClient({ isShow, setIsShow }) {
           <Modal.Title>Add New Client</Modal.Title>
         </Modal.Header>
         <Modal.Body className="px-3">
-          <Form ref={myForm} onSubmit={handleSub} className="px-2">
+          <Form onSubmit={() => handleSub(this)} className="px-2">
             <Form.Group as={Row} className="mb-3">
               <Form.Label>First Name</Form.Label>
               <Form.Control
@@ -42,16 +40,15 @@ export default function AddClient({ isShow, setIsShow }) {
               <Form.Label>Email</Form.Label>
               <Form.Control name="client_email" placeholder="email" />
             </Form.Group>
+
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+              <Button variant="primary">Save Changes</Button>
+            </Modal.Footer>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleSubmitButtonClick}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
       </Modal>
     </>
   );

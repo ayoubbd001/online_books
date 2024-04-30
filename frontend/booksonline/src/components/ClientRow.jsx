@@ -4,7 +4,7 @@ import { RiEdit2Line } from "react-icons/ri";
 import EditClient from "./clientModals/EditClient";
 import DeleteClient from "./clientModals/DeleteClient";
 
-export default function ClientRow() {
+export default function ClientRow({ client }) {
   const [showModalEdit, setShowModalEdit] = useState(false);
   const [showModalDelete, setShowModalDelete] = useState(false);
   return (
@@ -42,7 +42,10 @@ export default function ClientRow() {
                   >
                     <RiEdit2Line />
                   </button>
-                  <button className="btn">
+                  <button
+                    className="btn"
+                    onClick={() => setShowModalDelete(true)}
+                  >
                     <AiOutlineDelete />
                   </button>
                 </div>
@@ -52,7 +55,7 @@ export default function ClientRow() {
         </div>
       </div>
       <EditClient isShow={showModalEdit} handleShow={setShowModalEdit} />
-      {/* <DeleteClient /> */}
+      <DeleteClient isShow={showModalDelete} handleShow={setShowModalDelete} />
     </div>
   );
 }
