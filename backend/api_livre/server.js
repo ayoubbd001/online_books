@@ -12,16 +12,16 @@ app.use(cors());
 
 app.use(express.json());
 
-const port = process.env.port || 3000;
+const port = process.env.port || 3001;
 
-// app.get("/", (req, res) => {
-//   res.send("hello");s
-// });
-
-app.use("/api/v1/livre", livreRoutes);
+app.use("/api/v1", livreRoutes);
 
 mongoose
-  .connect("mongodb://localhost:27017/Livres")
+  .connect("mongodb://localhost:27017/Livres", {
+    bufferCommands: false, // Disable buffering commands
+    serverSelectionTimeoutMS: 10000, // Timeout for server selection
+    socketTimeoutMS: 45000, // Timeout for socket operations
+  })
   .then(() => {
     console.log("connected");
   })

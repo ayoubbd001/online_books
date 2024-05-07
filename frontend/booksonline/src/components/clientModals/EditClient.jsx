@@ -1,5 +1,4 @@
 import React from "react";
-import { useRef } from "react";
 
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -7,12 +6,67 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 
-export default function EditClient({ isShow, handleShow, ClientData }) {
-  const handleClose = () => handleShow(false);
-  const myForm = useRef();
-  const handleSub = async (e) => {
+import { useState } from "react";
+
+import { useDispatch } from "react-redux";
+import { editClient } from "../../store/clientSlice";
+
+export default function EditClient({ isShow, handleShow, client }) {
+  const dispatch = useDispatch();
+
+  const [formData, setFormData] = useState({
+    _id: client._id,
+    firstname: client.firstname,
+    lastname: client.lastname,
+    email: client.email,
+    phone: client.phone,
+  });
+
+  const handleClose = () => {
+    handleShow(false);
+    setFormData({
+      _id: client._id,
+      firstname: client.firstname,
+      lastname: client.lastname,
+      email: client.email,
+      phone: client.phone,
+    });
+  };
+
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.firstname.trim()) {
+      newErrors.firstname = "firstname is required";
+    }
+    if (!formData.lastname.trim()) {
+      newErrors.lastname = "lastname is required";
+    }
+    if (!formData.email.trim()) {
+      newErrors.email = "email is required";
+    }
+
+    if (!formData.phone) {
+      newErrors.phone = "phone is required";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("hello");
+
+    if (!validateForm()) {
+      return;
+    }
+    dispatch(editClient(formData));
+    handleShow(false);
   };
   return (
     <>
@@ -21,40 +75,57 @@ export default function EditClient({ isShow, handleShow, ClientData }) {
           <Modal.Title>Edit Client</Modal.Title>
         </Modal.Header>
         <Modal.Body className="px-3">
-          <Form ref={myForm} onSubmit={handleSub} className="px-2">
+          <Form className="px-2" onSubmit={handleSubmit}>
             <Form.Group as={Row} className="mb-3">
               <Form.Label>First Name</Form.Label>
               <Form.Control
                 type="text"
-                name="fs_name"
+                name="fisrtname"
                 placeholder="first name"
+                value={formData.firstname}
+                onChange={handleChange}
               />
             </Form.Group>
             <Form.Group as={Row} className="mb-3">
               <Form.Label>Last Name</Form.Label>
 
-              <Form.Control name="ls_name" placeholder="last name" />
+              <Form.Control
+                name="lastname"
+                placeholder="last name"
+                value={formData.lastname}
+                onChange={handleChange}
+              />
             </Form.Group>
             <Form.Group as={Row} className="mb-3">
               <Form.Label>Email</Form.Label>
 
-              <Form.Control name="client_email" placeholder="email" />
+              <Form.Control
+                name="email"
+                placeholder="email"
+                value={formData.email}
+                onChange={handleChange}
+              />
             </Form.Group>
+            <Form.Group as={Row} className="mb-3">
+              <Form.Label>Email</Form.Label>
+
+              <Form.Control
+                name="phone"
+                placeholder="number phone"
+                value={formData.phone}
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+              <Button variant="primary" type="submit">
+                Save Changes
+              </Button>
+            </Modal.Footer>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button
-            variant="primary"
-            onClick={() => {
-              myForm.submit();
-            }}
-          >
-            Save Changes
-          </Button>
-        </Modal.Footer>
       </Modal>
     </>
   );

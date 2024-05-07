@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { RiEdit2Line } from "react-icons/ri";
-import EditClient from "./clientModals/EditClient";
-import DeleteClient from "./clientModals/DeleteClient";
+import EditLivre from "./livreModals/EditLivre";
+import DeleteLivre from "./livreModals/DeleteLivre";
+import { useState } from "react";
 
-export default function ClientRow({ client }) {
+export default function BookRow({ livre }) {
   const [showModalEdit, setShowModalEdit] = useState(false);
   const [showModalDelete, setShowModalDelete] = useState(false);
+
   return (
     <div>
       <div className="mb-3 col-12">
@@ -20,20 +22,20 @@ export default function ClientRow({ client }) {
                   href="/app/pages/product/data-list?p=18"
                 >
                   <p className="list-item-heading mb-1 truncate">
-                    {client.firstname}
+                    {livre.code}
                   </p>
                 </a>
                 <p className="mb-1 text-muted text-small w-15 w-sm-100">
-                  {client.lastname}
+                  {livre.titre}
                 </p>
                 <p className="mb-1 text-muted text-small w-15 w-sm-100"></p>
                 <div className="w-15 w-sm-100">
                   <p className="mb-1 text-muted text-small w-15 w-sm-100">
-                    {client.email}
+                    {livre.description}
                   </p>
                 </div>
                 <p className="mb-1 text-muted text-small w-15 w-sm-100">
-                  {client.phone}
+                  {livre.auteur}
                 </p>
               </div>
               <div className="custom-control custom-checkbox pl-1 align-self-center pr-4">
@@ -56,16 +58,18 @@ export default function ClientRow({ client }) {
           </div>
         </div>
       </div>
-      <EditClient
+
+      <EditLivre
         isShow={showModalEdit}
         handleShow={setShowModalEdit}
-        client={client}
+        livre={livre}
       />
-      <DeleteClient
-        clientId={client._id}
-        clientName={client.fullName}
+
+      <DeleteLivre
         isShow={showModalDelete}
         handleShow={setShowModalDelete}
+        bookTitle={livre.titre}
+        bookCode={livre._id}
       />
     </div>
   );

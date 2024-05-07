@@ -1,35 +1,33 @@
 import React from "react";
-
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { deleteClient } from "../../store/clientSlice";
 import { useDispatch } from "react-redux";
-
-export default function DeleteClient({
+import { deleteLivre } from "../../store/livreSlice";
+export default function DeleteLivre({
   isShow,
   handleShow,
-  clientId,
-  clientName,
+  bookTitle,
+  bookCode,
 }) {
-  const dispatch = useDispatch();
   const handleClose = () => handleShow(false);
-
-  const handleDelete = (id) => {
-    dispatch(deleteClient(id));
+  const dispatch = useDispatch();
+  const handleDelete = (code) => {
+    console.log(code);
+    dispatch(deleteLivre(code));
     handleShow(false);
   };
   return (
     <>
       <Modal show={isShow} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Delete Client</Modal.Title>
+          <Modal.Title>Delete Book</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Are you sure want to delete {clientName}</Modal.Body>
+        <Modal.Body>Are you sure want to delete {bookTitle}</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={() => handleDelete(clientId)}>
+          <Button variant="primary" onClick={() => handleDelete(bookCode)}>
             Save Changes
           </Button>
         </Modal.Footer>

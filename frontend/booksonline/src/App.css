@@ -220,3 +220,211 @@ input:focus {
 .form svg {
   width: 17px;
 }
+
+/* LOGIN PAGE */
+
+.login-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  background: rgba(24, 20, 20, 0.987);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+}
+
+.login-box .user-box {
+  position: relative;
+}
+
+.login-box .user-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff !important;
+  margin-bottom: 30px !important;
+  border: none !important;
+  border-bottom: 1px solid #fff !important;
+  outline: none;
+  background: transparent !important;
+}
+
+.login-box .user-box label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.login-box .user-box input:focus ~ label,
+.login-box .user-box input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: #bdb8b8;
+  font-size: 12px;
+}
+
+.login-box form a {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #ffffff;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: 0.5s;
+  margin-top: 40px;
+  letter-spacing: 4px;
+}
+
+.login-box a:hover {
+  background: #03f40f;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #03f40f, 0 0 25px #03f40f, 0 0 50px #03f40f,
+    0 0 100px #03f40f;
+}
+
+.login-box a span {
+  position: absolute;
+  display: block;
+}
+
+@keyframes btn-anim1 {
+  0% {
+    left: -100%;
+  }
+
+  50%,
+  100% {
+    left: 100%;
+  }
+}
+
+.login-box a span:nth-child(1) {
+  bottom: 2px;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #03f40f);
+  animation: btn-anim1 2s linear infinite;
+}
+
+/* ALERT */
+
+.alert {
+  position: fixed !important;
+  right: -200% !important;
+  top: 50px;
+  width: auto;
+  transition: all 600ms;
+  border-radius: 8px;
+  z-index: 10000 !important;
+  background-color: #fff;
+}
+.alert-success {
+  border-left: 6px solid rgb(207, 21, 21) !important;
+  color: #000 !important;
+}
+
+.alert-success {
+  border-left: 6px solid rgb(17, 168, 105) !important;
+  color: #000 !important;
+}
+
+.alert-info {
+  border-left: 6px solid rgb(19, 119, 201) !important;
+  color: #000 !important;
+}
+
+.cl-type-danger {
+  fill: rgb(207, 21, 21) !important;
+}
+
+.cl-type-success {
+  fill: rgb(17, 168, 105) !important;
+}
+.cl-type-info {
+  fill: rgb(19, 119, 201) !important;
+}
+.show-alert {
+  right: 10% !important;
+}
+
+/* HOME CARD */
+/* this card is inspired form this - https://georgefrancis.dev/ */
+
+#home .card {
+  --border-radius: 0.75rem;
+  --primary-color: #7257fa;
+  --secondary-color: #3c3852;
+  width: 210px;
+  font-family: "Arial";
+  padding: 1rem;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  background: #f1f1f3;
+  box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 3%);
+  position: relative;
+}
+
+#home .card > * + * {
+  margin-top: 1.1em;
+}
+
+#home .card .card__content {
+  color: var(--secondary-color);
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+#home .card .card__title {
+  padding: 0;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+#home .card .card__date {
+  color: #6e6b80;
+  font-size: 0.8rem;
+}
+
+#home .card .card__arrow {
+  position: absolute;
+  background: #7257fa !important;
+  padding: 0.4rem;
+  border-top-left-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+  bottom: 0;
+  right: 0;
+  transition: 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#home .card svg {
+  transition: 0.2s;
+}
+
+/* hover */
+#home .card:hover .card__title {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+#home .card:hover .card__arrow {
+  background: #111;
+}
+
+#Home .card:hover .card__arrow svg {
+  transform: translateX(3px);
+}

@@ -8,7 +8,7 @@ export default function MainHeader() {
       <div className="welcome">Welecome back Ayoub 👋</div>
 
       <div className="user_box">
-        <DropdownButton id="dropdown-item-button" title="hello">
+        <DropdownButton id="dropdown-item-button" title={"a"}>
           <Dropdown.ItemText>Ayoub bd</Dropdown.ItemText>
           <Dropdown.Divider></Dropdown.Divider>
           <Dropdown.Item href="/profil" as="button">

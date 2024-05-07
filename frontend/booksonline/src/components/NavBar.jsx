@@ -1,9 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { PiHeartHalfFill } from "react-icons/pi";
-import { GoStarFill } from "react-icons/go";
+import { IoIosBook } from "react-icons/io";
+import { FaUsers } from "react-icons/fa";
 import { IoHomeSharp } from "react-icons/io5";
-import { FaArrowUpRightDots } from "react-icons/fa6";
+import { PiBookmarksSimpleBold } from "react-icons/pi";
 
 export default function NavBar() {
   return (
@@ -25,7 +25,7 @@ export default function NavBar() {
             <li className="nav-item">
               <NavLink to="/clients" className="nav-link">
                 <span>
-                  <GoStarFill />
+                  <FaUsers />
                 </span>
                 <span>Clients</span>
               </NavLink>
@@ -33,7 +33,7 @@ export default function NavBar() {
             <li className="nav-item">
               <NavLink to="/emprunts" className="nav-link">
                 <span>
-                  <FaArrowUpRightDots />
+                  <PiBookmarksSimpleBold />
                 </span>
                 <span>Emprunt</span>
               </NavLink>
@@ -41,7 +41,7 @@ export default function NavBar() {
             <li className="nav-item">
               <NavLink className="nav-link" to="/livres">
                 <span>
-                  <PiHeartHalfFill />
+                  <IoIosBook />
                 </span>
                 <span>Livres</span>
               </NavLink>

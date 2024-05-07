@@ -14,18 +14,22 @@ app.use(cors());
 
 // app.use(express.json());
 
-app.use(bodyParser.urlencoded());
-app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded());
+app.use(express.json());
 
 // Middleware to parse URL-encoded bodies
 // app.use(express.urlencoded({ extended: true }));
 
-const port = process.env.port || 3001;
+const port = process.env.port || 3005;
 
-app.use("/clients", clientRoutes);
+app.use("/api/v1", clientRoutes);
 
 mongoose
-  .connect("mongodb://localhost:27017/clients")
+  .connect("mongodb://localhost:27017/clients", {
+    bufferCommands: false, // Disable buffering commands
+    serverSelectionTimeoutMS: 10000, // Timeout for server selection
+    socketTimeoutMS: 45000, // Timeout for socket operations
+  })
   .then(() => {
     console.log("connected");
   })

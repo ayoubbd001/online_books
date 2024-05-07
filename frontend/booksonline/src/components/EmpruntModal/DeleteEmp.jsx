@@ -1,35 +1,29 @@
 import React from "react";
-
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { deleteClient } from "../../store/clientSlice";
 import { useDispatch } from "react-redux";
-
-export default function DeleteClient({
-  isShow,
-  handleShow,
-  clientId,
-  clientName,
-}) {
-  const dispatch = useDispatch();
+import { deleteEmprunt } from "../../store/empruntSlice";
+export default function DeleteEmp({ isShow, handleShow, EmpTitle, EmpCode }) {
   const handleClose = () => handleShow(false);
-
-  const handleDelete = (id) => {
-    dispatch(deleteClient(id));
+  const dispatch = useDispatch();
+  const handleDelete = (code) => {
+    dispatch(deleteEmprunt(code));
     handleShow(false);
   };
   return (
     <>
       <Modal show={isShow} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Delete Client</Modal.Title>
+          <Modal.Title>Delete Emp</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Are you sure want to delete {clientName}</Modal.Body>
+        <Modal.Body>
+          Are you sure want to delete emprunt for {EmpTitle}
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={() => handleDelete(clientId)}>
+          <Button variant="primary" onClick={() => handleDelete(EmpCode)}>
             Save Changes
           </Button>
         </Modal.Footer>
