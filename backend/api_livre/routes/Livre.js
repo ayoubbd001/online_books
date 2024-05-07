@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import Livre from "../Models/Livre.js";
 import sendMessage from "../utils/SndRabbit.js";
+import amqp from "amqplib";
 
 const routes = express.Router();
 

@@ -2,7 +2,8 @@ import amqp from "amqplib";
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-// import mongoose from "mongoose";
+import axios from "axios";
+import nodemailer from "nodemailer";
 
 dotenv.config();
 
@@ -18,9 +19,9 @@ const rabbitUrl = "amqp://localhost:5672";
 
 app.listen(port, (err) => {
   if (err) {
-    console.log("error listen to port", port);
+    console.log("error notification to port", port);
   } else {
-    console.log("service livre listen to port", port);
+    console.log("service notification listen to port", port);
   }
 });
 
@@ -57,7 +58,6 @@ async function consumeMessages() {
   }
 }
 
-// Handler function for new emprunt added event
 // function handleNewEmpruntAdded(emprunt) {
 //   // Logic to send notification email to the client
 //   console.log("Sending notification email for new emprunt:", emprunt);
@@ -67,8 +67,47 @@ async function consumeMessages() {
 //   console.log("Sending notification email for returned emprunt:", emprunt);
 // }
 
-function handleNewLivreAdded(livre) {
-  console.log("Sending notification email for new livre added:", livre);
+async function handleNewLivreAdded(livre) {
+  const res = await axios.get("http://localhost:3005/api/v1/clients");
+  const clientsList = await res.data.clients;
+  if (clientsList) {
+    for (let i = 0; i < clientsList.length; i++) {
+      let email = clientsList[i].email;
+      sendMail(email, "New livre Addde to our collection", livre);
+    }
+  }
 }
+
+const transporter = nodemailer.createTransport({
+  host: process.env.my_host,
+  port: 465,
+  secure: true,
+  auth: {
+    user: process.env.my_username,
+    pass: process.env.my_password,
+  },
+});
+
+const sendMail = async (_to, subject, lv) => {
+  const text = `<h1>${subject}}</h1>
+    <p>Livre Titre: ${lv.titre}</p>
+    <p>Livre Description: ${lv.description}</p>
+    <p>Livre Auteur: ${lv.auteur}</p>
+  `;
+  try {
+    let info = await transporter.sendMail({
+      from: process.env.my_username,
+      to: _to,
+      subject: subject,
+      html: text,
+    });
+
+    console.log("Email sent:", info.messageId);
+    return { success: true, messageId: info.messageId };
+  } catch (error) {
+    console.error("Error sending email:", error);
+    return { success: false, error: error };
+  }
+};
 
 consumeMessages();

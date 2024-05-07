@@ -3,7 +3,7 @@ services:
   api_livre:
     build: ./api_livre
     ports:
-      - "3000:3000"
+      - "3001:3000"
     depends_on:
       - mongodb
 
@@ -17,14 +17,14 @@ services:
   api_notification:
     build: ./api_notification
     ports:
-      - "3006:3000"
+      - "3007:3000"
     depends_on:
       - mongodb
 
   api_emprunt:
     build: ./api_emprunt
     ports:
-      - "3007:3000"
+      - "3006:3000"
     depends_on:
       - mongodb
 

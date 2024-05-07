@@ -31,7 +31,7 @@ export default function App() {
                 <Route path="/clients" element={<Client />}></Route>
                 <Route path="/emprunts" element={<Emprunt />}></Route>
                 <Route path="/livres" element={<Livre />}></Route>
-                <Route path="/login" element={<Login />}></Route>
+                {/* <Route path="/login" element={<Login />}></Route> */}
                 <Route
                   path="/client/emprunts/:id"
                   element={<ClientEmp />}

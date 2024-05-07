@@ -25,6 +25,7 @@ export const addLivre = createAsyncThunk(
         return res.data.livre;
       } else {
         dispatch(showAlertAsync({ message: res.data.msg, type: "danger" }));
+        return null;
       }
     } catch (error) {
       dispatch(
@@ -105,6 +106,12 @@ const LivresSlice = createSlice({
       .addCase(getLivres.rejected, (state, action) => {
         state.loading = false;
         state.error = "Failed to fetch livre list";
+      })
+      .addCase(addLivre.fulfilled, (state, action) => {
+        if (action.payload !== null) {
+          const newLivre = action.payload;
+          state.livresList.push(newLivre);
+        }
       })
       .addCase(editLivre.fulfilled, (state, action) => {
         const editedLivre = action.payload;

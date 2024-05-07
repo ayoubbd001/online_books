@@ -29,6 +29,7 @@ export const addClient = createAsyncThunk(
         return res.data.client;
       } else {
         dispatch(showAlertAsync({ message: res.data.msg, type: "danger" }));
+        return null;
       }
     } catch (error) {
       throw new Error("An error occurs, please try again");
@@ -96,6 +97,12 @@ const ClientsSlice = createSlice({
       .addCase(getClients.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+      })
+      .addCase(addClient.fulfilled, (state, action) => {
+        if (action.payload !== null) {
+          const newClient = action.payload;
+          state.clientsList.push(newClient);
+        }
       })
       .addCase(editClient.fulfilled, (state, action) => {
         const editedClient = action.payload;

@@ -1,5 +1,7 @@
 async function sendMessage(message) {
   try {
+    const rabbitUrl = "amqp://localhost:5672";
+
     const connection = await amqp.connect(rabbitUrl);
     const channel = await connection.createChannel();
     const queue = "notification_queue";

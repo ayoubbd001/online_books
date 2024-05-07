@@ -15,19 +15,13 @@ export default function Client() {
     dispatch(getClients());
   }, []);
 
-  // console.log(clientsList);
-
-  // const clientPlaceholderList = Array.from(
-  //   { length: 20 },
-  //   (_, index) => index + 1
-  // );
   return (
     <div className="px-5 py-2">
       <div className="controle d-flex justify-content-between align-items-center mb-3">
         <div className="title">Clients List</div>
         <div className="controll-btn d-flex align-items-center">
           <div className="group-form me-3">
-            <SearchBar />
+            <SearchBar slc={"clients"} />
           </div>
           <button
             className="btn btn-secondary"
